@@ -1,11 +1,10 @@
-import React from "react"
+import React from "react";
 
-
-
-export default function() {
-    return (
-        <div>
-            <h2>Portfolio items</h2>
-        </div>
-    )
+export default function(props) {
+  return (
+    <div>
+      <h3>{props.title}</h3>
+      <h4>{props.url}</h4>
+    </div>
+  );
 }
