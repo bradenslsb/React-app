@@ -17,7 +17,7 @@ export default class PortfolioContainer extends Component {
       ]
     };
 
-    this.handleFilter = this.handleFilter.bind(this);
+    this.handlePageTitleUpdate = this.handlePageTitleUpdate.bind(this)
   }
 
   handleFilter(filter) {
@@ -45,17 +45,12 @@ export default class PortfolioContainer extends Component {
       <div>
         <h2>{this.state.pageTitle}</h2>
 
-        <button onClick={() => this.handleFilter("eCommerce")}>
-          eCommerce
-        </button>
-        <button onClick={() => this.handleFilter("Scheduling")}>
-          Scheduling
-        </button>
-        <button onClick={() => this.handleFilter("Enterprise")}>
-          Enterprise
-        </button>
-
         {this.portfolioItems()}
+
+        <hr/>
+
+        <button onClick={this.handlePageTitleUpdate}>Change Title</button>
+
       </div>
     );
   }
