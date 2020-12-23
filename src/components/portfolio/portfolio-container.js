@@ -34,6 +34,12 @@ export default class PortfolioContainer extends Component {
     });
   }
 
+  handlePageTitleUpdate() {
+    this.setState({
+      pageTitle: "Something else"
+    })
+  }
+
   render() {
     return (
       <div>
