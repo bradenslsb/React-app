@@ -24,7 +24,14 @@ export default class PortfolioForm extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.componentConfig = this.componentConfig.bind(this)
-    this.djsCongig = this.djsCongig.bind(this)
+    this.djsConfig = this.djsConfig.bind(this)
+    this.handleThumbDrop = this.handleThumbDrop.bind(this)
+  }
+
+  handleThumbDrop() {
+    return {
+      addedfile: file => this.setState({ thumb_image: file })
+    }
   }
 
   componentConfig() {
@@ -35,7 +42,7 @@ export default class PortfolioForm extends Component {
     }
   }
 
-  djsCongig() {
+  djsConfig() {
     return {
       addRemoveLinks: true,
       maxFiles: 1
@@ -50,6 +57,9 @@ export default class PortfolioForm extends Component {
     formData.append("portfolio_item[url]", this.state.url)
     formData.append("portfolio_item[category]", this.state.category)
     formData.append("portfolio_item[position]", this.state.position)
+    if (this.state.thumb_image) {
+      formDatat.append("portfolio_item"[thumb_image], this.state.thumb_image)
+    }
 
     return formData
   }
@@ -123,6 +133,16 @@ export default class PortfolioForm extends Component {
               value={this.state.description}
               onChange={this.handleChange}
             />
+          </div>
+
+          <div className="image-uploaders">
+            <DropzoneComponent 
+              congif={this.componentConfig()}
+              djsCongig={this.djsConfig()}
+              eventHandlers={this.handleThumbDrop()}
+              >
+
+              </DropzoneComponent>
           </div>
 
           <div>
