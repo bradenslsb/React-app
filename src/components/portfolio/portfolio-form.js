@@ -26,6 +26,7 @@ export default class PortfolioForm extends Component {
     formData.append("portfolio_item[description]", this.state.description)
     formData.append("portfolio_item[url]", this.state.url)
     formData.append("portfolio_item[category]", this.state.category)
+    formData.append("portfolio_item[position]", this.state.position)
 
     return formData
   }
