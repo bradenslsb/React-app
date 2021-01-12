@@ -17,8 +17,11 @@ export default class PortfolioForm extends Component {
       url: "",
       thumb_image: "",
       banner_image: "",
-      logo: ""
-    }
+      logo: "",
+      editMode: false,
+      apiUrl: "https://bradenbird.devcamp.space/portfolio/portfolio_items",
+      apiAction: "post"
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,6 +36,36 @@ export default class PortfolioForm extends Component {
     this.bannerRef = React.createRef()
     this.logoRef = React.createRef()
 
+  }
+
+  componentDidUpdate() {
+    if(Object.keys(this.props.portfolioToEdit).length > 0) {
+      const {
+        id,
+        name,
+        description,
+        category,
+        position,
+        url,
+        thumbImage_url,
+        banner_image_url,
+        logo_url
+      } = this.props.portfolioToEdit
+
+      this.props.clearPortfolioToEdit()
+
+      this.setState({
+        id: id,
+        name: name || "",
+        description: description || "",
+        category: category || "eCommerce",
+        position: position || "",
+        url: url || "",
+        editMode: false,
+        apiUrl: `https://bradenbird.devcamp.space/portfolio/portfolio_items/${id}`,
+        apiAction: "patch"
+      })
+    }
   }
 
   handleThumbDrop() {
