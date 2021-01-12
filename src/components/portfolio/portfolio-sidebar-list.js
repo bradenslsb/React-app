@@ -11,9 +11,14 @@ export default function PortfolioSidebarList(props) {
         </div>
         <div className="text-content">
           <div className="title">{portfolioItem.name}</div>
-          <a className="delete-icon" onClick={() => props.handleDeleteClick(portfolioItem)}>
-            <FontAwesomeIcon icon="trash" />
-          </a>
+          <div className="actions">
+            <a className="action-icon" onClick={() => props.handleEditClick(portfolioItem)}>
+              <FontAwesomeIcon icon="edit" />
+            </a>
+            <a className="action-icon" onClick={() => props.handleDeleteClick(portfolioItem)}>
+              <FontAwesomeIcon icon="trash" />
+            </a>
+          </div>
         </div>
       </div>
     )
