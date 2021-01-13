@@ -30,6 +30,7 @@ export default class PortfolioForm extends Component {
     this.handleThumbDrop = this.handleThumbDrop.bind(this);
     this.handleBannerDrop = this.handleBannerDrop.bind(this);
     this.handleLogoDrop = this.handleLogoDrop.bind(this);
+    this.deleteImage = this.deleteImage.bind(this)
 
 
     this.thumbRef = React.createRef()
@@ -37,6 +38,10 @@ export default class PortfolioForm extends Component {
     this.logoRef = React.createRef()
 
   }
+
+  deleteImage(imageType) {
+    console.log("delete image" , imageType)
+  } 
 
   componentDidUpdate() {
     if(Object.keys(this.props.portfolioToEdit).length > 0) {
@@ -47,7 +52,7 @@ export default class PortfolioForm extends Component {
         category,
         position,
         url,
-        thumbImage_url,
+        thumb_image_url,
         banner_image_url,
         logo_url
       } = this.props.portfolioToEdit
@@ -63,7 +68,10 @@ export default class PortfolioForm extends Component {
         url: url || "",
         editMode: false,
         apiUrl: `https://bradenbird.devcamp.space/portfolio/portfolio_items/${id}`,
-        apiAction: "patch"
+        apiAction: "patch",
+        thumb_image: thumb_image_url || "",
+        banner_image: banner_image_url || "",
+        logo: logo_url || ""
       })
     }
   }
@@ -224,14 +232,40 @@ export default class PortfolioForm extends Component {
           </div>
 
           <div className="image-uploaders">
-            <DropzoneComponent
-              ref={this.thumbRef}
-              config={this.componentConfig()}
-              djsConfig={this.djsConfig()}
-              eventHandlers={this.handleThumbDrop()}
-            >
-              <div className="dz-message">Thumbnail</div>
-            </DropzoneComponent>
+            {/* { true ? "do if true" : "do if false" }*/}
+
+            {this.state.thumb_image && this.state.editMode ? (
+              <div className="portfolio-manager-image-wrapper">
+                <img src={this.state.thumb_image} />
+
+                <div className= "image-removal-link">
+                  <a onClick={() => this.deleteImage("thumb_image")}>
+                    Remove file
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <DropzoneComponent
+                ref={this.thumbRef}
+                config={this.componentConfig()}
+                djsConfig={this.djsConfig()}
+                eventHandlers={this.handleThumbDrop()}
+              >
+                <div className="dz-message">Thumbnail</div>
+              </DropzoneComponent>
+            )}
+
+            {this.state.banner_image && this.state.editMode ? (
+              <div className="portfolio-manager-image-wrapper">
+                <img src={this.state.banner_image} />
+
+                <div className= "image-removal-link">
+                  <a onClick={() => this.deleteImage("banner_image")}>
+                    Remove file
+                  </a>
+                </div>
+              </div>
+            ) : (
 
             <DropzoneComponent
               ref={this.bannerRef}
@@ -241,6 +275,19 @@ export default class PortfolioForm extends Component {
             >
               <div className="dz-message">Banner</div>
             </DropzoneComponent>
+            )}
+
+            {this.state.logo && this.state.editMode ? (
+              <div className="portfolio-manager-image-wrapper">
+                <img src={this.state.logo} />
+
+                <div className= "image-removal-link">
+                  <a onClick={() => this.deleteImage("logo")}>
+                    Remove file
+                  </a>
+                </div>
+              </div>
+            ) : (
 
             <DropzoneComponent
               ref={this.logoRef}
@@ -250,6 +297,7 @@ export default class PortfolioForm extends Component {
             >
               <div className="dz-message">Logo</div>
             </DropzoneComponent>
+            )}
           </div>
 
           <div>
