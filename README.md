@@ -1,5 +1,5 @@
-# React/Redux/Router Starter Project
+# This is the process in building out my Portfolio
 
-> Provided for the students of the [Bottega Code School](https://bottega.tech/)
+> This was something that took quite a bit of work for me and took a few weeks to complete but I learned so much about react after this that I feel very confedeint in building out this same kind of application for someone else.
 
-*Fork from [es6-webpack2-starter](https://github.com/micooz/es6-webpack2-starter)*"# React-app" 
+
