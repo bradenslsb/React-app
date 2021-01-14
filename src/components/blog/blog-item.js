@@ -20,7 +20,6 @@ const BlogItem = props => {
       <div>
         {content}
       </div>
-      <div></div>
     </div>
   )
 }
