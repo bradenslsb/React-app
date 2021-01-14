@@ -17,16 +17,24 @@ class Blog extends Component {
     }
 
     this.getBlogItems = this.getBlogItems.bind(this)
-    this.activateInfiniteScroll()
+    this.onScroll = this.onScroll.bind(this)
+    window.addEventListener("scroll", this.onScroll, false)
   }
 
-  activateInfiniteScroll() {
-    window.onscroll = () => {
-      if(window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-        console.log("get more posts")
+  onScroll() {
+      if(this.state.isLoading || 
+        this.state.blogItems.length === this.state.totalCount
+        ) {
+        return
+      }
+
+
+      if(window.innerHeight + document.documentElement.scrollTop === 
+        document.documentElement.offsetHeight) {
+      } {
+        this.getBlogItems
       }
     }
-  }
 
   getBlogItems() {
     this.setState({
@@ -34,12 +42,13 @@ class Blog extends Component {
     })
 
     axios
-      .get("https://bradenbird.devcamp.space/portfolio/portfolio_blogs",
+      .get(`https://bradenbird.devcamp.space/portfolio/portfolio_blogs?page=${this
+        .state.currentPage}`,
       { withCredentials: true }
       ).then(response => {
         console.log("getting", response.data)
         this.setState({
-          blogItems: response.data.portfolio_blogs,
+          blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
           totalCount: response.data.meta.total_records,
           isLoading: false
         })
@@ -48,8 +57,12 @@ class Blog extends Component {
       })
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getBlogItems()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, false)
   }
 
 
