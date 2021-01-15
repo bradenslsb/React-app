@@ -39,7 +39,7 @@ export default class BlogModal extends Component {
           }} 
           isOpen={this.props.modalIsOpen} 
         >
-          <BlogForm />
+          <BlogForm handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission} />
         </ReactModal>
       </div>
     )
