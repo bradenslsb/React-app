@@ -56,7 +56,7 @@ class Blog extends Component {
       if(window.innerHeight + document.documentElement.scrollTop === 
         document.documentElement.offsetHeight) {
       } {
-        this.getBlogItems
+        this.getBlogItems()
       }
     }
 
