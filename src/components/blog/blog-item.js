@@ -25,7 +25,7 @@ const BlogItem = props => {
             ...<Link to={`/b/${id}`}>Read More</Link>
           </span>
         }>
-          {content}
+          {striptags(content)}
         </Truncate>
       </div>
     </div>
