@@ -1,35 +1,38 @@
-import React, { Component } from 'react'
-import axios from "axios"
-import ReactHtmlParser from "react-html-parser"
+import React, { Component } from "react";
+import axios from "axios";
+import ReactHtmlParser from "react-html-parser";
 
-import BlogFeaturedImage from '../blog/blog-featured-image'
-
+import BlogFeaturedImage from "../blog/blog-featured-image";
 
 export default class BlogDetail extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       currentId: this.props.match.params.slug,
       blogItem: {}
-    }
+    };
   }
 
   getBlogItem() {
     axios
-      .get(`https://bradenbird.devcamp.space/portfolio/portfolio_blogs/${this.state.currentId}`
-      ).then(response => {
-        console.log(response)
+      .get(
+        `https://bradenbird.devcamp.space/portfolio/portfolio_blogs/${
+          this.state.currentId
+        }`
+      )
+      .then(response => {
         this.setState({
           blogItem: response.data.portfolio_blog
-        })
-      }).catch(error => {
-        console.log("get error bolg" , error)
+        });
       })
+      .catch(error => {
+        console.log("getBlogItem error", error);
+      });
   }
 
   componentDidMount() {
-    this.getBlogItem()
+    this.getBlogItem();
   }
 
   render() {
@@ -38,20 +41,18 @@ export default class BlogDetail extends Component {
       content,
       featured_image_url,
       blog_status
-    } = this.state.blogItem
+    } = this.state.blogItem;
 
     return (
       <div className="blog-container">
         <div className="content-container">
           <h1>{title}</h1>
-          
+
           <BlogFeaturedImage img={featured_image_url} />
 
-          <div className="content">
-            {ReactHtmlParser(content)}
-          </div>
+          <div className="content">{ReactHtmlParser(content)}</div>
         </div>
       </div>
-    )
+    );
   }
 }
