@@ -76,7 +76,7 @@ class Blog extends Component {
         }
       )
       .then(response => {
-        console.log("gettting", response.data);
+        console.log("getting", response.data);
         this.setState({
           blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
           totalCount: response.data.meta.total_records,
@@ -88,7 +88,7 @@ class Blog extends Component {
       });
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getBlogItems();
   }
 
